@@ -2,29 +2,19 @@ import { useWords } from "../../context/WordsContext";
 import WordCardInput from "../../components/WordCardInput/WordCardInput";
 
 function AddWord() {
-  const { words, addWord } = useWords();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formDataObject = {};
-
-    formData.forEach((value, key) => {
-      formDataObject[key] = value;
-    });
-
-    addWord(formDataObject);
-    e.target.reset();
-  };
-  console.log(words);
+  const { words } = useWords();
 
   return (
-    <WordCardInput
-      handleSubmit={handleSubmit}
-      header="Add a new wrod"
-      meaningText="Meaning"
-      wordText="Word"
-    />
+    <>
+      <WordCardInput
+        header="Add a new word"
+        meaningText="Meaning"
+        wordText="Word"
+      />
+      {words.map((item) => (
+        <WordCardInput item={item} key={item._id} type="edit" />
+      ))}
+    </>
   );
 }
 
