@@ -1,10 +1,20 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const WordContext = createContext();
 
+const initialWords = JSON.parse(localStorage.getItem("word")) || [];
+
 export const WordProvider = ({ children }) => {
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState(initialWords);
+
+  useEffect(() => {
+    addWordsToLocalStorage(words);
+  }, [words]);
+
+  const addWordsToLocalStorage = (words) => {
+    localStorage.setItem("word", JSON.stringify(words));
+  };
 
   const addWord = (newWordData) => {
     if (!newWordData || Object.keys(newWordData).length === 0) {
@@ -36,7 +46,12 @@ export const WordProvider = ({ children }) => {
     );
   };
 
-  const contextValues = { words, setWords, addWord, editWord };
+  const removeWord = (id) => {
+    console.log(id);
+    setWords(words.filter((item) => item._id !== id));
+  };
+
+  const contextValues = { words, setWords, addWord, editWord, removeWord };
 
   return (
     <WordContext.Provider value={contextValues}>
