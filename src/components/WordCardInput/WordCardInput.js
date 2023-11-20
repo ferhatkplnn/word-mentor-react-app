@@ -8,7 +8,7 @@ import {
   FormHelperText,
   Button,
 } from "@chakra-ui/react";
-import { AddIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useWords } from "../../context/WordsContext";
 
 function WordCardInput({
@@ -23,7 +23,7 @@ function WordCardInput({
     meaning: item?.meaning || "",
   });
 
-  const { addWord, editWord } = useWords();
+  const { addWord, editWord, removeWord } = useWords();
 
   const handleInputChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -74,6 +74,12 @@ function WordCardInput({
               <EditIcon boxSize="5" />
             )}
           </Button>
+
+          {type !== "add" && (
+            <Button onClick={() => removeWord(item._id)}>
+              <DeleteIcon boxShadow="5" />
+            </Button>
+          )}
         </Flex>
       </form>
     </Card>
