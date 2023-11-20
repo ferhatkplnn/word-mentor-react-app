@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Heading,
@@ -9,42 +9,74 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
+import { useWords } from "../../context/WordsContext";
 
 function WordCardInput({
-  handleSubmit,
   header = "",
-  wordText = "",
-  meaningText = "",
+  wordText = "Word",
+  meaningText = "Meaning",
   type = "add",
+  item,
 }) {
-  return (
-    <div>
-      <Card mx="auto" maxW="90%" p="5">
-        <Heading textAlign="center" fontSize="xl" mb="2">
-          {header}
-        </Heading>
-        <form onSubmit={handleSubmit}>
-          <Flex>
-            <FormControl mb="2">
-              <Input type="text" name="word" required />
-              <FormHelperText>{wordText}</FormHelperText>
-            </FormControl>
-            <FormControl>
-              <Input type="text" name="meaning" required />
-              <FormHelperText>{meaningText}</FormHelperText>
-            </FormControl>
+  const [inputs, setInputs] = useState({
+    word: item?.word || "",
+    meaning: item?.meaning || "",
+  });
 
-            <Button type="submit">
-              {type === "add" ? (
-                <AddIcon boxSize="5" />
-              ) : (
-                <EditIcon boxSize="5" />
-              )}
-            </Button>
-          </Flex>
-        </form>
-      </Card>
-    </div>
+  const { addWord, editWord } = useWords();
+
+  const handleInputChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (type === "add") {
+      setInputs({ word: "", meaning: "" });
+      addWord(inputs);
+    } else {
+      editWord(inputs, item._id);
+    }
+  };
+  return (
+    <Card mx="auto" maxW="90%" p="5" mt="4">
+      <Heading textAlign="center" fontSize="xl" mb="2">
+        {header}
+      </Heading>
+      <form onSubmit={handleSubmit}>
+        <Flex>
+          <FormControl mb="2">
+            <Input
+              type="text"
+              name="word"
+              required
+              value={inputs?.word}
+              onChange={handleInputChange}
+            />
+            <FormHelperText>{wordText}</FormHelperText>
+          </FormControl>
+          <FormControl>
+            <Input
+              type="text"
+              name="meaning"
+              required
+              value={inputs?.meaning}
+              onChange={handleInputChange}
+            />
+            <FormHelperText>{meaningText}</FormHelperText>
+          </FormControl>
+
+          <Button type="submit">
+            {type === "add" ? (
+              <AddIcon boxSize="5" />
+            ) : (
+              <EditIcon boxSize="5" />
+            )}
+          </Button>
+        </Flex>
+      </form>
+    </Card>
   );
 }
 
