@@ -8,10 +8,13 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-function LinkCard({ title, descreptionText = "" }) {
+function LinkCard({ title, descreptionText = "", to = "/" }) {
   return (
     <Card
+      as={Link}
+      to={to}
       display="grid"
       alignContent="center"
       textAlign="center"
