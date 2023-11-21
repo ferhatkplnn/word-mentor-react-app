@@ -10,8 +10,8 @@ function Home() {
         descreptionText="Add a new word to your word box or edit your words."
         to="/addword"
       />
-      <LinkCard title="Beginner word box" />
-      <LinkCard title="Intermediate word box" />
+      <LinkCard title="Beginner word box" to="/beginner-word-box" />
+      <LinkCard title="Intermediate word box" to="/intermediate-word-box" />
       <LinkCard title="Advanced word box" />
       <LinkCard title="Random word box" />
       <LinkCard title="Hard word box" />
