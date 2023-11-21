@@ -23,7 +23,7 @@ function WordCardInput({
     meaning: item?.meaning || "",
   });
 
-  const { addWord, editWord, removeWord } = useWords();
+  const { addWord, updateWord, removeWord } = useWords();
 
   const handleInputChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -36,7 +36,7 @@ function WordCardInput({
       setInputs({ word: "", meaning: "" });
       addWord(inputs);
     } else {
-      editWord(inputs, item._id);
+      updateWord(inputs, item._id);
     }
   };
   return (
