@@ -1,36 +1,23 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import wordReducer, { ActionTypes } from "../reducers/WordReducer";
 
 const WordContext = createContext();
 
 const initialWords = JSON.parse(localStorage.getItem("word")) || [];
 
 export const WordProvider = ({ children }) => {
-  const [words, setWords] = useState(initialWords);
+  const [state, dispatch] = useReducer(wordReducer, { words: initialWords });
 
   useEffect(() => {
-    addWordsToLocalStorage(words);
-  }, [words]);
-
-  const addWordsToLocalStorage = (words) => {
-    localStorage.setItem("word", JSON.stringify(words));
-  };
+    localStorage.setItem("word", JSON.stringify(state.words));
+  }, [state.words]);
 
   const addWord = (newWordData) => {
     if (!newWordData || Object.keys(newWordData).length === 0) {
       console.error("Invalid data for adding a word");
       return;
     }
-
-    const newWord = {
-      ...newWordData,
-      score: 0,
-      mistakeScore: 0,
-      correctScore: 0,
-      _id: uuidv4(),
-    };
-
-    setWords((prevWords) => [...prevWords, newWord]);
+    dispatch({ type: ActionTypes.ADD_WORD, payload: { newWordData } });
   };
 
   const updateWord = (updatedData, id) => {
@@ -39,20 +26,19 @@ export const WordProvider = ({ children }) => {
       return;
     }
 
-    setWords((prevWords) =>
-      prevWords.map((item) =>
-        item._id === id ? { ...item, ...updatedData } : item
-      )
-    );
+    dispatch({
+      type: ActionTypes.UPDATE_WORD,
+      payload: { updatedData, id },
+    });
   };
 
   const removeWord = (id) => {
     console.log(id);
-    setWords(words.filter((item) => item._id !== id));
+    dispatch({ type: ActionTypes.REMOVE_WORD, payload: { id } });
   };
 
   const getRandomWordId = (minLimit, maxLimit) => {
-    const filteredWords = words.filter(
+    const filteredWords = state.words.filter(
       (item) => item.score >= minLimit && item.score < maxLimit
     );
 
@@ -68,43 +54,24 @@ export const WordProvider = ({ children }) => {
   };
 
   const increaseScore = (id) => {
-    setWords(
-      words.map((item) => {
-        if (item._id === id) {
-          return {
-            ...item,
-            score: item.score + 1,
-            correctScore: item.correctScore + 1,
-          };
-        }
-        return item;
-      })
-    );
+    dispatch({
+      type: ActionTypes.INCREASE_SCORE,
+      payload: { id },
+    });
   };
 
   const decreaseScore = (id) => {
-    setWords(
-      words.map((item) => {
-        if (item._id === id) {
-          return {
-            ...item,
-            score: item.score - 1,
-            mistakeScore: item.mistakeScore + 1,
-          };
-        }
-
-        return item;
-      })
-    );
+    dispatch({
+      type: ActionTypes.DECREASE_SCORE,
+      payload: { id },
+    });
   };
 
   const getWord = (id) => {
-    return words.find((word) => word._id === id);
+    return state.words.find((word) => word._id === id);
   };
 
   const contextValues = {
-    words,
-    setWords,
     addWord,
     updateWord,
     removeWord,
@@ -112,6 +79,7 @@ export const WordProvider = ({ children }) => {
     getWord,
     increaseScore,
     decreaseScore,
+    state,
   };
 
   return (
