@@ -2,7 +2,7 @@ import { useWords } from "../../context/WordsContext";
 import WordCardInput from "../../components/WordCardInput/WordCardInput";
 
 function AddWord() {
-  const { words } = useWords();
+  const { state } = useWords();
 
   return (
     <>
@@ -11,7 +11,7 @@ function AddWord() {
         meaningText="Meaning"
         wordText="Word"
       />
-      {words.map((item) => (
+      {state.words.map((item) => (
         <WordCardInput item={item} key={item._id} type="edit" />
       ))}
     </>
