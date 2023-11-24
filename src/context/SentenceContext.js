@@ -26,10 +26,15 @@ export const SentenceProvider = ({ children }) => {
     });
   };
 
+  const getRandomSentence = () => {
+    return state.sentences[Math.floor(Math.random() * state.sentences.length)];
+  };
+
   const contextValues = {
     state,
     dispatch,
     addSentence,
+    getRandomSentence,
   };
 
   return (
