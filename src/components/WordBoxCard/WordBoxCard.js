@@ -9,24 +9,32 @@ import {
   Input,
   Button,
   ScaleFade,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { useWords } from "../../context/WordsContext";
+import { useSentence } from "../../context/SentenceContext";
 
 function WordBoxCard({ title, limit }) {
+  const { getRandomSentence } = useSentence();
   const { getRandomWordId, getWord, increaseScore, decreaseScore } = useWords();
+
   const [input, setInput] = useState("");
   const [wordId, setWordId] = useState(
     getRandomWordId(limit.minLimit, limit.maxLimit)
   );
-
   const [isDisabled, setIsDisabled] = useState(Boolean(!wordId));
-
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
+  const [isShowSentence, setIsShowSentence] = useState(false);
+  const [sentenceText, setSentenceText] = useState("");
+
+  const currentWord = getWord(wordId);
 
   const nextWord = () => {
     setIsDisabled(false);
     setIsOpen(false);
+    setIsShowSentence(false);
+
     setTimeout(() => {
       setWordId(getRandomWordId(limit.minLimit, limit.maxLimit));
       inputRef.current.focus();
@@ -36,17 +44,23 @@ function WordBoxCard({ title, limit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (input === getWord(wordId).meaning) {
+    if (!currentWord) {
+      console.error("Word is not found!");
+      return;
+    }
+
+    if (input === currentWord.meaning) {
       setIsOpen(true);
-
       increaseScore(wordId);
-
       setInput("");
       setIsDisabled(true);
+
       setTimeout(nextWord, 1000);
     } else {
       decreaseScore(wordId);
       setIsOpen(true);
+      setIsShowSentence(true);
+      setSentenceText(getRandomSentence().sentence);
     }
   };
 
@@ -63,7 +77,7 @@ function WordBoxCard({ title, limit }) {
       <Card textAlign="center" maxW="40%" mx="auto">
         <CardHeader>
           <Heading size="lg">
-            {wordId ? getWord(wordId).word : "No more word"}
+            {wordId ? currentWord.word : "No more word"}
           </Heading>
         </CardHeader>
 
@@ -77,12 +91,19 @@ function WordBoxCard({ title, limit }) {
                 mt="4"
                 rounded="md"
               >
-                {wordId ? getWord(wordId).meaning : ""}
+                {wordId ? currentWord.meaning : ""}
               </Heading>
             </ScaleFade>
 
             <form onSubmit={handleSubmit}>
               <FormControl mb="2">
+                <FormHelperText
+                  pb="2"
+                  style={{ visibility: isShowSentence ? "" : "hidden" }}
+                >
+                  {sentenceText}
+                </FormHelperText>
+
                 <Input
                   type="text"
                   name="word"
