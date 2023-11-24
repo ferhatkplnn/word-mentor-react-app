@@ -7,9 +7,11 @@ import {
   Input,
   FormHelperText,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { AddIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { AddIcon, EditIcon, DeleteIcon, StarIcon } from "@chakra-ui/icons";
 import { useWords } from "../../context/WordsContext";
+import SentenceAddInputModel from "./SentenceAddInputModel";
 
 function WordCardInput({
   header = "",
@@ -23,6 +25,7 @@ function WordCardInput({
     meaning: item?.meaning || "",
   });
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { addWord, updateWord, removeWord } = useWords();
 
   const handleInputChange = (e) => {
@@ -39,6 +42,7 @@ function WordCardInput({
       updateWord(inputs, item._id);
     }
   };
+
   return (
     <Card mx="auto" maxW="90%" p="5" mt="4">
       <Heading textAlign="center" fontSize="xl" mb="2">
@@ -76,9 +80,19 @@ function WordCardInput({
           </Button>
 
           {type !== "add" && (
-            <Button onClick={() => removeWord(item._id)}>
-              <DeleteIcon boxShadow="5" />
-            </Button>
+            <>
+              <Button onClick={() => removeWord(item._id)}>
+                <DeleteIcon boxShadow="5" />
+              </Button>
+              <Button onClick={onOpen}>
+                <StarIcon boxShadow="5" />
+              </Button>
+              <SentenceAddInputModel
+                isOpen={isOpen}
+                onClose={onClose}
+                wordId={item._id}
+              />
+            </>
           )}
         </Flex>
       </form>
