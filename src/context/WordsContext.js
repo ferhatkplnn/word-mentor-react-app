@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import wordReducer, { ActionTypes } from "../reducers/WordReducer";
+import wordReducer, { WordActionTypes } from "../reducers/WordReducer";
 
 const WordContext = createContext();
 
@@ -17,7 +17,7 @@ export const WordProvider = ({ children }) => {
       console.error("Invalid data for adding a word");
       return;
     }
-    dispatch({ type: ActionTypes.ADD_WORD, payload: { newWordData } });
+    dispatch({ type: WordActionTypes.ADD_WORD, payload: { newWordData } });
   };
 
   const updateWord = (updatedData, id) => {
@@ -27,14 +27,14 @@ export const WordProvider = ({ children }) => {
     }
 
     dispatch({
-      type: ActionTypes.UPDATE_WORD,
+      type: WordActionTypes.UPDATE_WORD,
       payload: { updatedData, id },
     });
   };
 
   const removeWord = (id) => {
     console.log(id);
-    dispatch({ type: ActionTypes.REMOVE_WORD, payload: { id } });
+    dispatch({ type: WordActionTypes.REMOVE_WORD, payload: { id } });
   };
 
   const getRandomWordId = (minLimit, maxLimit) => {
@@ -55,14 +55,14 @@ export const WordProvider = ({ children }) => {
 
   const increaseScore = (id) => {
     dispatch({
-      type: ActionTypes.INCREASE_SCORE,
+      type: WordActionTypes.INCREASE_SCORE,
       payload: { id },
     });
   };
 
   const decreaseScore = (id) => {
     dispatch({
-      type: ActionTypes.DECREASE_SCORE,
+      type: WordActionTypes.DECREASE_SCORE,
       payload: { id },
     });
   };
