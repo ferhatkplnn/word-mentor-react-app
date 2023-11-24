@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-export const ActionTypes = {
+export const WordActionTypes = {
   ADD_WORD: "ADD_WORD",
   UPDATE_WORD: "UPDATE_WORD",
   REMOVE_WORD: "REMOVE_WORD",
@@ -10,7 +10,7 @@ export const ActionTypes = {
 
 export default function wordReducer(state, action) {
   switch (action.type) {
-    case ActionTypes.ADD_WORD: {
+    case WordActionTypes.ADD_WORD: {
       const newWord = {
         ...action.payload.newWordData,
         score: 0,
@@ -20,7 +20,7 @@ export default function wordReducer(state, action) {
       };
       return { ...state, words: [...state.words, newWord] };
     }
-    case ActionTypes.UPDATE_WORD: {
+    case WordActionTypes.UPDATE_WORD: {
       return {
         ...state,
         words: state.words.map((item) =>
@@ -30,7 +30,7 @@ export default function wordReducer(state, action) {
         ),
       };
     }
-    case ActionTypes.REMOVE_WORD: {
+    case WordActionTypes.REMOVE_WORD: {
       console.log(action.payload.id);
       console.log(state.words.filter((item) => item._id !== action.payload.id));
       return {
@@ -38,7 +38,7 @@ export default function wordReducer(state, action) {
         words: state.words.filter((item) => item._id !== action.payload.id),
       };
     }
-    case ActionTypes.INCREASE_SCORE: {
+    case WordActionTypes.INCREASE_SCORE: {
       return {
         ...state,
         words: state.words.map((item) =>
@@ -53,7 +53,7 @@ export default function wordReducer(state, action) {
       };
     }
 
-    case ActionTypes.DECREASE_SCORE: {
+    case WordActionTypes.DECREASE_SCORE: {
       return {
         ...state,
         words: state.words.map((item) =>
