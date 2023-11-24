@@ -4,16 +4,16 @@ import "./index.css";
 import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
-import { WordProvider } from "./context/WordsContext";
+import ContextsProvider from "./context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-      <WordProvider>
+      <ContextsProvider>
         <ChakraProvider>
           <App />
         </ChakraProvider>
-      </WordProvider>
+      </ContextsProvider>
     </React.StrictMode>
   </BrowserRouter>
 );
