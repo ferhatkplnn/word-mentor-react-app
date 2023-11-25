@@ -33,7 +33,6 @@ export const WordProvider = ({ children }) => {
   };
 
   const removeWord = (id) => {
-    console.log(id);
     dispatch({ type: WordActionTypes.REMOVE_WORD, payload: { id } });
   };
 
@@ -49,7 +48,6 @@ export const WordProvider = ({ children }) => {
     let randomIndex = Math.floor(Math.random() * filteredWords.length);
     let randomWord = filteredWords[randomIndex];
 
-    console.log(randomWord);
     return randomWord._id;
   };
 

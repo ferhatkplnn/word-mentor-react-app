@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import Speech from "react-text-to-speech";
 import {
   Card,
   CardBody,
@@ -76,6 +77,12 @@ function WordBoxCard({ title, limit }) {
 
       <Card textAlign="center" maxW="40%" mx="auto">
         <CardHeader>
+          <Speech
+            text={currentWord.word}
+            stopBtn={false}
+            rate={0.8}
+            volume={1}
+          />
           <Heading size="lg">
             {wordId ? currentWord.word : "No more word"}
           </Heading>
@@ -101,6 +108,12 @@ function WordBoxCard({ title, limit }) {
                   pb="2"
                   style={{ visibility: isShowSentence ? "" : "hidden" }}
                 >
+                  <Speech
+                    text={sentenceText}
+                    stopBtn={false}
+                    rate={0.8}
+                    volume={1}
+                  />
                   {sentenceText}
                 </FormHelperText>
 
