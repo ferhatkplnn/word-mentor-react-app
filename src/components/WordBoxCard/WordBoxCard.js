@@ -60,7 +60,7 @@ function WordBoxCard({ title, limit }) {
       decreaseScore(wordId);
       setIsOpen(true);
       setIsShowSentence(true);
-      setSentenceText(getRandomSentence().sentence);
+      setSentenceText(getRandomSentence(wordId).sentence);
     }
   };
 
