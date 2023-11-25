@@ -32,9 +32,9 @@ function WordBoxCard({ title, limit }) {
 
   const currentWord = getWord(wordId);
 
-  useEffect(() => {
-    speak(currentWord.word);
-  }, [currentWord.word]);
+  // useEffect(() => {
+  //   speak(currentWord.word);
+  // }, [currentWord.word]);
   const nextWord = () => {
     setIsDisabled(false);
     setIsOpen(false);
@@ -54,7 +54,7 @@ function WordBoxCard({ title, limit }) {
       return;
     }
 
-    if (input === currentWord.meaning) {
+    if (input === currentWord.word) {
       setIsOpen(true);
       increaseScore(wordId);
       setInput("");
@@ -67,6 +67,7 @@ function WordBoxCard({ title, limit }) {
       setIsShowSentence(true);
       setSentenceText(getRandomSentence(wordId)?.sentence);
     }
+    speak(currentWord?.word);
   };
 
   const handleChange = (e) => {
@@ -88,7 +89,7 @@ function WordBoxCard({ title, limit }) {
             volume={1}
           />
           <Heading size="lg">
-            {wordId ? currentWord.word : "No more word"}
+            {wordId ? currentWord.meaning : "No more word"}
           </Heading>
         </CardHeader>
 
@@ -102,7 +103,7 @@ function WordBoxCard({ title, limit }) {
                 mt="4"
                 rounded="md"
               >
-                {wordId ? currentWord.meaning : ""}
+                {wordId ? currentWord.word : ""}
               </Heading>
             </ScaleFade>
 
@@ -118,7 +119,7 @@ function WordBoxCard({ title, limit }) {
                     rate={0.8}
                     volume={1}
                   />
-                  {sentenceText}
+                  {sentenceText ? sentenceText : "-"}
                 </FormHelperText>
 
                 <Input
