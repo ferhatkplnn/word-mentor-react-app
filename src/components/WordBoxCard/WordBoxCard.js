@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Speech from "react-text-to-speech";
 import {
   Card,
@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useWords } from "../../context/WordsContext";
 import { useSentence } from "../../context/SentenceContext";
+import { speak } from "../../utils/speak";
 
 function WordBoxCard({ title, limit }) {
   const { getRandomSentence } = useSentence();
@@ -31,6 +32,9 @@ function WordBoxCard({ title, limit }) {
 
   const currentWord = getWord(wordId);
 
+  useEffect(() => {
+    speak(currentWord.word);
+  }, [currentWord.word]);
   const nextWord = () => {
     setIsDisabled(false);
     setIsOpen(false);
