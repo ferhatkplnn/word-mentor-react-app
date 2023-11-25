@@ -5,7 +5,16 @@ import sentenceReducer, {
 
 const SentenceContext = createContext();
 
-const initialSentences = JSON.parse(localStorage.getItem("sentences")) || [];
+let initialSentences = [];
+
+try {
+  const storedSentences = localStorage.getItem("sentences");
+  if (storedSentences) {
+    initialSentences = JSON.parse(storedSentences);
+  }
+} catch (error) {
+  console.error("Error parsing stored sentences:", error);
+}
 
 export const SentenceProvider = ({ children }) => {
   const [state, dispatch] = useReducer(sentenceReducer, {
@@ -14,7 +23,7 @@ export const SentenceProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("sentences", JSON.stringify(state.sentences));
-  }, [state]);
+  }, [state.sentences]);
 
   const addSentence = (sentence, id) => {
     dispatch({
@@ -26,8 +35,14 @@ export const SentenceProvider = ({ children }) => {
     });
   };
 
-  const getRandomSentence = () => {
-    return state.sentences[Math.floor(Math.random() * state.sentences.length)];
+  const getRandomSentence = (id) => {
+    const filteredSentence = state.sentences.filter(
+      (sentence) => id === sentence.id
+    );
+
+    return filteredSentence[
+      Math.floor(Math.random() * filteredSentence.length)
+    ];
   };
 
   const contextValues = {
