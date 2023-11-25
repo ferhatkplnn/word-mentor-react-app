@@ -78,7 +78,7 @@ function WordBoxCard({ title, limit }) {
       <Card textAlign="center" maxW="40%" mx="auto">
         <CardHeader>
           <Speech
-            text={currentWord.word}
+            text={currentWord?.word}
             stopBtn={false}
             rate={0.8}
             volume={1}
