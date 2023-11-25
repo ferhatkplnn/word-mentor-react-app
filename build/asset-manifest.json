@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/word-mentor-react-app/static/css/main.e6c13ad2.css",
+    "main.js": "/word-mentor-react-app/static/js/main.2b17ba95.js",
+    "index.html": "/word-mentor-react-app/index.html",
+    "main.e6c13ad2.css.map": "/word-mentor-react-app/static/css/main.e6c13ad2.css.map",
+    "main.2b17ba95.js.map": "/word-mentor-react-app/static/js/main.2b17ba95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.2b17ba95.js"
+  ]
+}
