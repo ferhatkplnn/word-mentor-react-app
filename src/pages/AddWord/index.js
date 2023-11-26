@@ -1,5 +1,5 @@
 import { useWords } from "../../context/WordsContext";
-import WordCardInput from "../../components/WordCardInput/WordCardInput";
+import WordCardInput from "../../components/WordManagementForm/WordManagementForm";
 
 function AddWord() {
   const { state } = useWords();
