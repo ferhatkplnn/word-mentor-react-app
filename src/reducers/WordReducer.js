@@ -60,7 +60,7 @@ export default function wordReducer(state, action) {
           item._id === action.payload.id
             ? {
                 ...item,
-                score: item.score - 1,
+                score: item.score - 2,
                 mistakeScore: item.mistakeScore + 1,
               }
             : item
