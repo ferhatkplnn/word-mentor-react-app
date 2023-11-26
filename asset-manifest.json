@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/word-mentor-react-app/static/css/main.e6c13ad2.css",
-    "main.js": "/word-mentor-react-app/static/js/main.bcb6e0cc.js",
+    "main.js": "/word-mentor-react-app/static/js/main.fec0281b.js",
     "index.html": "/word-mentor-react-app/index.html",
     "main.e6c13ad2.css.map": "/word-mentor-react-app/static/css/main.e6c13ad2.css.map",
-    "main.bcb6e0cc.js.map": "/word-mentor-react-app/static/js/main.bcb6e0cc.js.map"
+    "main.fec0281b.js.map": "/word-mentor-react-app/static/js/main.fec0281b.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.bcb6e0cc.js"
+    "static/js/main.fec0281b.js"
   ]
 }
