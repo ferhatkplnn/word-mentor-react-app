@@ -13,7 +13,7 @@ import { AddIcon, EditIcon, DeleteIcon, StarIcon } from "@chakra-ui/icons";
 import { useWords } from "../../context/WordsContext";
 import SentenceAddInputModel from "./SentenceAddInputModel";
 
-function WordCardInput({
+function WordManagementForm({
   header = "",
   wordText = "Word",
   meaningText = "Meaning",
@@ -100,4 +100,4 @@ function WordCardInput({
   );
 }
 
-export default WordCardInput;
+export default WordManagementForm;
