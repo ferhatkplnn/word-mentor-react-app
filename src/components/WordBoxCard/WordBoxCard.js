@@ -1,41 +1,31 @@
 import React, { useRef, useState } from "react";
-import Speech from "react-text-to-speech";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  Stack,
-  FormControl,
-  Input,
-  Button,
-  ScaleFade,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { Card, CardBody, Heading, Stack } from "@chakra-ui/react";
 import { useWords } from "../../context/WordsContext";
 import { useSentence } from "../../context/SentenceContext";
 import { speak } from "../../utils/speak";
+import generateColor from "../../utils/generateColor";
+import WordCardHeader from "./WordCardHeader/WordCardHeader";
+import WordDisplay from "./WordDisplay/WordDisplay";
+import WordForm from "./WordForm/WordForm";
 
 function WordBoxCard({ title, limit }) {
   const { getRandomSentence } = useSentence();
   const { getRandomWordId, getWord, increaseScore, decreaseScore } = useWords();
 
   const [input, setInput] = useState("");
-  const [wordId, setWordId] = useState(
+  const [wordId, setWordId] = useState(() =>
     getRandomWordId(limit.minLimit, limit.maxLimit)
   );
-  const [isDisabled, setIsDisabled] = useState(Boolean(!wordId));
+  const [isDisabled, setIsDisabled] = useState(!wordId);
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
   const [isShowSentence, setIsShowSentence] = useState(false);
   const [sentenceText, setSentenceText] = useState("");
 
-  const currentWord = getWord(wordId);
+  const { word, meaning, score } = getWord(wordId);
+  const wordColor = generateColor(score, limit.minLimit);
 
-  // useEffect(() => {
-  //   speak(currentWord.word);
-  // }, [currentWord.word]);
-  const nextWord = () => {
+  const resetWord = () => {
     setIsDisabled(false);
     setIsOpen(false);
     setIsShowSentence(false);
@@ -46,31 +36,35 @@ function WordBoxCard({ title, limit }) {
     }, 300);
   };
 
+  const handleCorrectAnswer = () => {
+    setIsOpen(true);
+    increaseScore(wordId);
+    setInput("");
+    setIsDisabled(true);
+
+    setTimeout(resetWord, 1000);
+  };
+
+  const handleIncorrectAnswer = () => {
+    decreaseScore(wordId);
+    setIsOpen(true);
+    setIsShowSentence(true);
+    setSentenceText(getRandomSentence(wordId)?.sentence);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!currentWord) {
+    if (!word) {
       console.error("Word is not found!");
       return;
     }
 
-    if (input === currentWord.word) {
-      setIsOpen(true);
-      increaseScore(wordId);
-      setInput("");
-      setIsDisabled(true);
-
-      setTimeout(nextWord, 1000);
-    } else {
-      decreaseScore(wordId);
-      setIsOpen(true);
-      setIsShowSentence(true);
-      setSentenceText(getRandomSentence(wordId)?.sentence);
-    }
-    speak(currentWord?.word);
+    input === word ? handleCorrectAnswer() : handleIncorrectAnswer();
+    speak(word);
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setInput(e.target.value);
   };
 
@@ -81,67 +75,25 @@ function WordBoxCard({ title, limit }) {
       </Heading>
 
       <Card textAlign="center" maxW="40%" mx="auto">
-        <CardHeader>
-          <Speech
-            text={currentWord?.word}
-            stopBtn={false}
-            rate={0.8}
-            volume={1}
-          />
-          <Heading size="lg">
-            {wordId ? currentWord.meaning : "No more word"}
-          </Heading>
-        </CardHeader>
+        <WordCardHeader
+          wordId={wordId}
+          meaning={meaning}
+          wordColor={wordColor}
+        />
 
         <CardBody>
           <Stack spacing="6">
-            <ScaleFade in={isOpen}>
-              <Heading
-                textAlign="center"
-                p="30px"
-                fontSize="52px"
-                mt="4"
-                rounded="md"
-              >
-                {wordId ? currentWord.word : ""}
-              </Heading>
-            </ScaleFade>
+            <WordDisplay isOpen={isOpen} wordId={wordId} word={word} />
 
-            <form onSubmit={handleSubmit}>
-              <FormControl mb="2">
-                <FormHelperText
-                  pb="2"
-                  style={{ visibility: isShowSentence ? "" : "hidden" }}
-                >
-                  <Speech
-                    text={sentenceText}
-                    stopBtn={false}
-                    rate={0.8}
-                    volume={1}
-                  />
-                  {sentenceText ? sentenceText : "-"}
-                </FormHelperText>
-
-                <Input
-                  type="text"
-                  name="word"
-                  placeholder="Meaning"
-                  required
-                  onChange={handleChange}
-                  value={input}
-                  disabled={isDisabled}
-                  ref={inputRef}
-                />
-              </FormControl>
-              <Button
-                width="full"
-                colorScheme="linkedin"
-                type="submit"
-                isDisabled={isDisabled}
-              >
-                Send
-              </Button>
-            </form>
+            <WordForm
+              isShowSentence={isShowSentence}
+              sentenceText={sentenceText}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              input={input}
+              isDisabled={isDisabled}
+              inputRef={inputRef}
+            />
           </Stack>
         </CardBody>
       </Card>
