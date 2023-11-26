@@ -4,7 +4,7 @@ function BeginnerWordBox() {
   return (
     <WordBoxCard
       title={"Beginner Word Box"}
-      limit={{ minLimit: -1000, maxLimit: 20 }}
+      limit={{ minLimit: -40, maxLimit: 20 }}
     />
   );
 }
