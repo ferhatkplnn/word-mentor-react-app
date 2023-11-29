@@ -77,6 +77,7 @@ function WordBoxCard({ title, limit }) {
       <Card textAlign="center" maxW="40%" mx="auto">
         <WordCardHeader
           wordId={wordId}
+          word={word}
           meaning={meaning}
           wordColor={wordColor}
         />
