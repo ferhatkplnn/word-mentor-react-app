@@ -29,9 +29,9 @@ function WordBoxCard({ title, limit }) {
     setIsDisabled(false);
     setIsOpen(false);
     setIsShowSentence(false);
+    setWordId(getRandomWordId(limit.minLimit, limit.maxLimit));
 
     setTimeout(() => {
-      setWordId(getRandomWordId(limit.minLimit, limit.maxLimit));
       inputRef.current.focus();
     }, 300);
   };
