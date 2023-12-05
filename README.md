@@ -36,6 +36,13 @@ Bu uygulama, React kullanılarak geliştirilmiş basit bir İngilizce kelime ö�
 
 ## Gorseller
 
+![image](https://github.com/ferhatkplnn/word-mentor-react-app/assets/29931637/ad062ce5-b71d-4e87-9198-c45dee3dc766)
+
+![image](https://github.com/ferhatkplnn/word-mentor-react-app/assets/29931637/d4ef6086-9be7-4b68-a7ab-25f0e8bb314e)
+
+![image](https://github.com/ferhatkplnn/word-mentor-react-app/assets/29931637/96239794-0e0b-4534-8f8e-38cf555325d3)
+
+
 ## Katkıda Bulunma
 
 Katkıda bulunmak istiyorsanız, lütfen bir konu açın veya bir çekme isteği gönderin. Katkılarınızı bekliyoruz!
