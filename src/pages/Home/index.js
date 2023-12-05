@@ -12,9 +12,9 @@ function Home() {
       />
       <LinkCard title="Beginner word box" to="/beginner-word-box" />
       <LinkCard title="Intermediate word box" to="/intermediate-word-box" />
-      <LinkCard title="Advanced word box" />
-      <LinkCard title="Random word box" />
-      <LinkCard title="Hard word box" />
+      <LinkCard title="Advanced word box" disabled={true} />
+      <LinkCard title="Random word box" disabled={true} />
+      <LinkCard title="Hard word box" disabled={true} />
     </Grid>
   );
 }
