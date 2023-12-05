@@ -44,7 +44,7 @@ export default function SentenceAddInputModel({ isOpen, onClose, wordId }) {
                   onChange={handleChange}
                   value={text}
                   ref={initialRef}
-                  placeholder="First name"
+                  placeholder="Add sentence"
                 />
               </FormControl>
             </ModalBody>
