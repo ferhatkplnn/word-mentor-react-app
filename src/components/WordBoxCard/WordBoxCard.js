@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Card, CardBody, Heading, Stack } from "@chakra-ui/react";
+import { Card, CardBody, Heading, Stack, Box } from "@chakra-ui/react";
 import { useWords } from "../../context/WordsContext";
 import { useSentence } from "../../context/SentenceContext";
 import { speak } from "../../utils/speak";
@@ -21,6 +21,14 @@ function WordBoxCard({ title, limit }) {
   const inputRef = useRef(null);
   const [isShowSentence, setIsShowSentence] = useState(false);
   const [sentenceText, setSentenceText] = useState("");
+
+  if (!wordId) {
+    return (
+      <Box display="flex" justifyContent="center" fontSize="55">
+        Please add word!
+      </Box>
+    );
+  }
 
   const { word, meaning, score } = getWord(wordId);
   const wordColor = generateColor(score, limit.minLimit);
