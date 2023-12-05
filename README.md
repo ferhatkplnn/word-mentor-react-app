@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Word Mentor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu uygulama, React kullanılarak geliştirilmiş basit bir İngilizce kelime öğrenme uygulamasıdır. Uygulama, kullanıcıların yeni kelimeler eklemelerine ve bu kelimeleri öğrenmeye yönelik bir arayüz sunar.
 
-## Available Scripts
+## Özellikler
 
-In the project directory, you can run:
+- **Yeni Kelime Ekleme:** Kullanıcılar, "Add a new word" bölümünden kelime ve anlamını ekleyebilirler.
+- **Başlangıç Seviyesi Kelimeler:** Eklenen kelimeler, "Beginner word box" bölümünde kullanıcıya sorulur. Kullanıcı, sadece 2 harf ipucuyla kelimeyi doğru tahmin etmeye çalışır.
+- **Sesli Geri Bildirim:** Yanlış bilinen kelimeler, sesli bir şekilde okunarak kullanıcıya doğru kelimeyi duyma fırsatı sunar.
+- **Renkli Gösterim:** Kelimelerin ne kadar iyi öğrenildiğini göstermek için renkli gösterim kullanılır. Kırmızıya yakın renk, kelimenin az bilindiğini; yeşile yakın renk ise kelimenin iyi bilindiğini gösterir.
 
-### `npm start`
+## Kurulum
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Bu depoyu bilgisayarınıza klonlayın.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   ```bash
+   git clone https://github.com/ferhatkplnn/word-mentor-react-app.git
+   ```
 
-### `npm test`
+2. Proje dizinine gidin.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   cd word-mentor-react-app
+   ```
 
-### `npm run build`
+3. Gerekli paketleri yükleyin.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Uygulamayı başlatın.
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Gorseller
 
-### `npm run eject`
+## Katkıda Bulunma
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Katkıda bulunmak istiyorsanız, lütfen bir konu açın veya bir çekme isteği gönderin. Katkılarınızı bekliyoruz!
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Lisans
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakabilirsiniz.
