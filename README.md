@@ -4,6 +4,8 @@ Bu uygulama, React kullanılarak geliştirilmiş basit bir İngilizce kelime ö�
 
 ## Özellikler
 
+[DEMO](https://ferhatkplnn.github.io/word-mentor-react-app/)
+
 - **Yeni Kelime Ekleme:** Kullanıcılar, "Add a new word" bölümünden kelime ve anlamını ekleyebilirler.
 - **Başlangıç Seviyesi Kelimeler:** Eklenen kelimeler, "Beginner word box" bölümünde kullanıcıya sorulur. Kullanıcı, sadece 2 harf ipucuyla kelimeyi doğru tahmin etmeye çalışır.
 - **Sesli Geri Bildirim:** Yanlış bilinen kelimeler, sesli bir şekilde okunarak kullanıcıya doğru kelimeyi duyma fırsatı sunar.
