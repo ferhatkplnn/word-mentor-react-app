@@ -10,11 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-function LinkCard({ title, descreptionText = "", to = "/" }) {
+function LinkCard({ title, descreptionText = "", to = "/", disabled = false }) {
   return (
     <Card
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
       as={Link}
-      to={to}
+      to={disabled ? "" : to}
       display="grid"
       alignContent="center"
       textAlign="center"
